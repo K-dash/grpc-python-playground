@@ -1,0 +1,23 @@
+services:
+    marketplace:
+        build:
+            context: .
+            dockerfile: marketplace/Dockerfile
+        environment:
+            RECOMMENDATIONS_HOST: recommendations
+        image: marketplace
+        networks:
+            - grpc-microservices
+        ports:
+            - "8001:8001"
+
+    recommendations:
+        build:
+            context: .
+            dockerfile: recommendations/Dockerfile
+        image: recommendations
+        networks:
+            - grpc-microservices
+
+networks:
+    grpc-microservices:
