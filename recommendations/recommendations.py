@@ -25,7 +25,7 @@ books_by_category = {
     ],
 }
 
-class RecommendationServcie(
+class RecommendationService(
     recommendations_pb2_grpc.RecommendationsServicer
 ):
     def Recommend(self, request, context):
@@ -41,7 +41,7 @@ class RecommendationServcie(
 def serve():
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
     recommendations_pb2_grpc.add_RecommendationsServicer_to_server(
-        RecommendationServcie(), server
+        RecommendationService(), server
     )
     server.add_insecure_port('[::]:50051')
     server.start()
